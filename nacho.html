@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Big Bite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nacho.css">
+</head>
+
+<body>
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <header>
+    <div class="logo-circulo">
+      <img src="img/logo.png">
+    </div>
+    <nav>
+      <a href="inicio.html">Inicio</a>
+      <a href="contacto.html">Info</a>
+      <a href="FORMULARIO.html">Formulario</a>
+    </nav>
+    <div class="header-derecha">
+      <div class="telefono">
+        +503 0000-0000
+      </div>
+      <!-- ÍCONO CARRITO EN HEADER -->
+      <div class="carrito-icono" onclick="toggleCarrito()">
+        🛒
+        <span id="contador" class="carrito-contador">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════ PANEL LATERAL DEL CARRITO ══════════════ -->
+  <div id="panel-carrito" class="panel-carrito oculto">
+    <div class="panel-carrito-header">
+      <h2>🛒 Tu Pedido</h2>
+      <button class="cerrar-carrito" onclick="toggleCarrito()">✕</button>
+    </div>
+
+    <ul id="carrito" class="carrito-lista"></ul>
+
+    <div class="carrito-total">
+      <strong>Total: $<span id="total">0.00</span></strong>
+    </div>
+
+    <button class="btn-pagar" onclick="pagar()">Realizar Pedido</button>
+  </div>
+
+  <!-- OVERLAY oscuro detrás del panel -->
+  <div id="overlay-carrito" class="overlay-carrito oculto" onclick="toggleCarrito()"></div>
+
+  <!-- ══════════════ 1. VIDEO ══════════════ -->
+  <div class="banner">
+    <video autoplay muted loop>
+      <source src="img/SODAS (1).mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ══════════════ 2. IMAGEN CENTRADA ══════════════ -->
+  <div class="cuadro-imagen">
+    <img src="img/10.png" alt="">
+  </div>
+
+  <!-- ══════════════ 3. FONDO + 3 IMÁGENES CUADRADAS ══════════════ -->
+  <section class="galeria-fondo">
+
+    <div class="galeria-fondo-bg">
+      <img src="img/fondo.png" alt="">
+    </div>
+
+    <div class="galeria-contenido">
+      <div class="imagen-superior">
+        <img src="img/menu H.png" alt="">
+      </div>
+
+      <div class="galeria-items"></div>
+
+      <!-- FILA SUPERIOR -->
+      <div class="galeria-items">
+
+        <!-- Producto 1: Nachos de Res -->
+        <div class="galeria-wrapper">
+          <div class="galeria-item" onclick="agregarCarrito('Nachos de Res', 1.75)" title="Agregar al carrito">
+            <img src="img/Normal de   carne-Photoroom.png" class="normal" alt="Nachos de Res">
+            <img src="img/nachos de res-Photoroom.png" class="hover" alt="Nachos de Res">
+            <div class="add-badge">+ Agregar</div>
+          </div>
+          <div class="galeria-panel panel-right">
+            <img src="img/formulario de carne.jpeg" alt="">
+          </div>
+        </div>
+
+        <!-- Producto 2: Nachos de Pollo -->
+        <div class="galeria-wrapper">
+          <div class="galeria-item" onclick="agregarCarrito('Nachos de Pollo', 1.75)" title="Agregar al carrito">
+            <img src="img/Normal de pollo-Photoroom.png" class="normal" alt="Nachos de Pollo">
+            <img src="img/nachos de pollo-Photoroom.png" class="hover" alt="Nachos de Pollo">
+            <div class="add-badge">+ Agregar</div>
+          </div>
+          <div class="galeria-panel panel-left">
+            <img src="img/formulario de pollo.jpeg" alt="">
+          </div>
+        </div>
+
+        <!-- Producto 3: Nachos de Cerdo -->
+        <div class="galeria-wrapper">
+          <div class="galeria-item" onclick="agregarCarrito('Nachos de Cerdo', 1.75)" title="Agregar al carrito">
+            <img src="img/normal de cerdo-Photoroom.png" class="normal" alt="Nachos de Cerdo">
+            <img src="img/nachos de cerdo-Photoroom.png" class="hover" alt="Nachos de Cerdo">
+            <div class="add-badge">+ Agregar</div>
+          </div>
+          <div class="galeria-panel panel-left">
+            <img src="img/formulario de cerdo.jpeg" alt="">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- IMAGEN INFERIOR DENTRO DEL FONDO -->
+      <div class="cuadro-imagen-bottom">
+        <img src="img/info-Photoroom.png" alt="">
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ══════════════ FACTURA (oculta hasta pagar) ══════════════ -->
+  <div id="factura" class="factura oculto">
+    <div class="factura-inner">
+      <h2>🧾 Factura Big Bite</h2>
+      <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+
+      <table class="factura-tabla">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="detalleFactura"></tbody>
+      </table>
+
+      <h3 class="factura-total">Total: $<span id="totalFactura"></span></h3>
+
+      <div class="factura-botones">
+        <button class="btn-imprimir" onclick="imprimir()">🖨 Imprimir</button>
+        <button class="btn-cerrar-factura" onclick="cerrarFactura()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERLAY factura -->
+  <div id="overlay-factura" class="overlay-carrito oculto" onclick="cerrarFactura()"></div>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <div class="footer-marca">
+      <div class="footer-logo">Big Bite</div>
+      <p class="footer-slogan">Sabor auténtico en cada bocado, hecho con amor desde El Salvador.</p>
+      <div class="footer-redes">
+        <a href="#" title="Facebook">&#x66;</a>
+        <a href="#" title="Instagram">&#x69;&#x67;</a>
+        <a href="#" title="WhatsApp">&#x77;&#x61;</a>
+      </div>
+    </div>
+
+    <div class="footer-contacto">
+      <p class="footer-contacto-titulo">Contáctanos</p>
+      <div class="footer-item">
+        <div class="footer-icono">📞</div>
+        +503 0000-0000
+      </div>
+      <div class="footer-item">
+        <div class="footer-icono">📧</div>
+        bigbite@gmail.com
+      </div>
+      <div class="footer-item">
+        <div class="footer-icono">📍</div>
+        El Salvador
+      </div>
+    </div>
+
+    <div class="footer-extra">
+      <p class="footer-extra-titulo">Horario</p>
+      <p class="footer-horario-item"><strong>Lun – Vie</strong><br>10:00 am – 8:00 pm</p>
+      <p class="footer-horario-item"><strong>Sáb – Dom</strong><br>10:00 am – 10:00 pm</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Big Bite. Todos los derechos reservados.</p>
+      <p class="footer-badge">Hecho con ❤ en El Salvador</p>
+    </div>
+  </footer>
+
+  <!-- ══════════════ EMAILJS ══════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("2sUDwvc6JnXMXbmMp");
+    })();
+  </script>
+
+  <!-- ══════════════ JAVASCRIPT CARRITO ══════════════ -->
+  <script>
+    let carrito = [];
+
+    /* ── Abrir / cerrar panel ── */
+    function toggleCarrito() {
+      const panel = document.getElementById('panel-carrito');
+      const overlay = document.getElementById('overlay-carrito');
+      panel.classList.toggle('oculto');
+      overlay.classList.toggle('oculto');
+    }
+
+    /* ── Agregar producto ── */
+    function agregarCarrito(nombre, precio) {
+      let producto = carrito.find(p => p.nombre === nombre);
+      if (producto) {
+        producto.cantidad++;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+      actualizarCarrito();
+
+      const icono = document.querySelector('.carrito-icono');
+      icono.classList.add('bump');
+      setTimeout(() => icono.classList.remove('bump'), 300);
+    }
+
+    /* ── Eliminar producto ── */
+    function eliminarProducto(index) {
+      carrito.splice(index, 1);
+      actualizarCarrito();
+    }
+
+    /* ── Actualizar lista y contador ── */
+    function actualizarCarrito() {
+      const lista = document.getElementById('carrito');
+      let total = 0;
+      let contador = 0;
+
+      lista.innerHTML = '';
+
+      if (carrito.length === 0) {
+        lista.innerHTML = '<li class="carrito-vacio">Tu carrito está vacío 🛒</li>';
+      }
+
+      carrito.forEach((producto, index) => {
+        const subtotal = (producto.precio * producto.cantidad).toFixed(2);
+        total += producto.precio * producto.cantidad;
+        contador += producto.cantidad;
+
+        const item = document.createElement('li');
+        item.className = 'carrito-item';
+        item.innerHTML = `
+          <div class="item-info">
+            <span class="item-nombre">${producto.nombre}</span>
+            <span class="item-precio">$${producto.precio.toFixed(2)} x ${producto.cantidad}</span>
+          </div>
+          <div class="item-derecha">
+            <span class="item-subtotal">$${subtotal}</span>
+            <button class="btn-eliminar" onclick="eliminarProducto(${index})">✕</button>
+          </div>
+        `;
+        lista.appendChild(item);
+      });
+
+      document.getElementById('total').textContent = total.toFixed(2);
+      document.getElementById('contador').textContent = contador;
+    }
+
+    /* ── Crear HTML para email ── */
+    function crearFacturaHTML() {
+      let filas = '';
+      let total = 0;
+
+      carrito.forEach(producto => {
+        const subtotal = producto.precio * producto.cantidad;
+        total += subtotal;
+        filas += `
+          <tr>
+            <td style="padding:8px;">${producto.nombre}</td>
+            <td style="padding:8px;">$${producto.precio.toFixed(2)}</td>
+            <td style="padding:8px;">${producto.cantidad}</td>
+            <td style="padding:8px;">$${subtotal.toFixed(2)}</td>
+          </tr>`;
+      });
+
+      return `
+        <table style="border-collapse:collapse;width:100%;font-family:Arial;">
+          <tr style="background:black;color:white;">
+            <th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th>
+          </tr>
+          ${filas}
+        </table>`;
+    }
+
+    /* ── Generar factura visual ── */
+    function generarFactura() {
+      const detalle = document.getElementById('detalleFactura');
+      let totalFactura = 0;
+
+      detalle.innerHTML = '';
+
+      carrito.forEach(producto => {
+        const subtotal = producto.precio * producto.cantidad;
+        totalFactura += subtotal;
+
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${producto.nombre}</td>
+          <td>$${producto.precio.toFixed(2)}</td>
+          <td>${producto.cantidad}</td>
+          <td>$${subtotal.toFixed(2)}</td>`;
+        detalle.appendChild(fila);
+      });
+
+      document.getElementById('totalFactura').textContent = totalFactura.toFixed(2);
+      document.getElementById('fecha').textContent = new Date().toLocaleString();
+
+      document.getElementById('factura').classList.remove('oculto');
+      document.getElementById('overlay-factura').classList.remove('oculto');
+    }
+
+    /* ── Cerrar factura ── */
+    function cerrarFactura() {
+      document.getElementById('factura').classList.add('oculto');
+      document.getElementById('overlay-factura').classList.add('oculto');
+    }
+
+    /* ── Pagar ── */
+    function pagar() {
+      if (carrito.length === 0) {
+        alert('El carrito está vacío');
+        return;
+      }
+
+      const confirmar = confirm('¿Desea realizar el pago?');
+      if (confirmar) {
+        const facturaHTML = crearFacturaHTML();
+        const totalFinal = carrito.reduce((s, p) => s + p.precio * p.cantidad, 0).toFixed(2);
+        const fecha = new Date().toLocaleString();
+
+        emailjs.send('service_9y4ox3r', 'template_oc3j0uj', {
+          factura: facturaHTML,
+          total: totalFinal,
+          fecha: fecha
+        })
+          .then(() => alert('Factura enviada al correo ✅'))
+          .catch(err => { alert('Error al enviar ❌'); console.log(err); });
+
+        generarFactura();
+        toggleCarrito();
+        carrito = [];
+        actualizarCarrito();
+      }
+    }
+
+    /* ── Imprimir ── */
+    function imprimir() {
+      window.print();
+    }
+  </script>
+
+</body>
+</html>

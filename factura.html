@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" href="css/factura.css">
+</head>
+
+<header>
+
+    <div class="logo-circulo">
+        <img src="img/logo.png" alt="">
+    </div>
+
+    <nav>
+
+        <a href="#">Inicio</a>
+
+        <a href="#">Menú</a>
+
+        <a href="#">Info</a>
+
+    </nav>
+
+    <div class="telefono">
+        +503 0000-0000
+    </div>
+
+</header>
+
+<body>
+
+
+<h2>Carrito compras</h2>
+<ul id="carrito"></ul>
+
+<h3>Total: $<span id="total">0</span></h3>
+
+<button class="pagar" onclick="pagar()">Comprar</button>
+
+<!-- FACTURA -->
+<div id="factura" class="factura oculto">
+
+    <h2>Factura</h2>
+
+    <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody id="detalleFactura"></tbody>
+    </table>
+
+    <h3>Total: $<span id="totalFactura"></span></h3>
+
+    <button onclick="imprimir()">Print</button>
+
+</div>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+    emailjs.init("2sUDwvc6JnXMXbmMp"); 
+})();
+</script>
+
+<script src="java/factura.js"></script>
+
+</body>
+</html>
+
+
+    
+<footer>
+
+  <div class="footer-marca">
+    <div class="footer-logo">Big Bite</div>
+    <p class="footer-slogan">Sabor auténtico en cada bocado, hecho con amor desde El Salvador.</p>
+    <div class="footer-redes">
+      <a href="#" title="Facebook">&#x66;</a>
+      <a href="#" title="Instagram">&#x69;&#x67;</a>
+      <a href="#" title="WhatsApp">&#x77;&#x61;</a>
+    </div>
+  </div>
+
+  <div class="footer-contacto">
+    <p class="footer-contacto-titulo">Contáctanos</p>
+    <div class="footer-item">
+      <div class="footer-icono">📞</div>
+      +503 0000-0000
+    </div>
+    <div class="footer-item">
+      <div class="footer-icono">📧</div>
+      bigbite@gmail.com
+    </div>
+    <div class="footer-item">
+      <div class="footer-icono">📍</div>
+      El Salvador
+    </div>
+  </div>
+
+  <div class="footer-extra">
+    <p class="footer-extra-titulo">Horario</p>
+    <p class="footer-horario-item"><strong>Lun – Vie</strong><br>10:00 am – 8:00 pm</p>
+    <p class="footer-horario-item"><strong>Sáb – Dom</strong><br>10:00 am – 10:00 pm</p>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Big Bite. Todos los derechos reservados.</p>
+    <p class="footer-badge">Hecho con ❤ en El Salvador</p>
+  </div>
+
+</footer>
+
+</body>
+</html>

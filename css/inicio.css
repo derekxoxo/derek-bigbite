@@ -1,0 +1,502 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Bebas+Neue&display=swap');
+
+:root {
+  --rojo:       #d62828;
+  --rojo-hover: #b81f1f;
+  --azul-pie:   #041a3b;
+  --negro:      #0f0f0f;
+  --gris-txt:   #5a5a5a;
+  --gris-suave: #f4f4f4;
+  --blanco:     #ffffff;
+
+  --sombra-xs: 0 2px 12px rgba(0,0,0,.06);
+  --sombra-s:  0 6px 24px rgba(0,0,0,.08);
+  --sombra-m:  0 14px 40px rgba(0,0,0,.11);
+  --sombra-l:  0 24px 64px rgba(0,0,0,.15);
+
+  --radio-sm: 12px;
+  --radio-md: 20px;
+  --radio-lg: 32px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--blanco);
+  color: var(--negro);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #bbb; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 14px 48px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.07), 0 4px 20px rgba(0,0,0,.05);
+}
+
+.logo-circulo img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: var(--sombra-s);
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+.logo-circulo img:hover { transform: scale(1.1) rotate(5deg); }
+
+nav {
+  display: flex;
+  gap: 36px;
+  margin-left: 30px;
+  margin-right: auto;
+}
+
+nav a {
+  text-decoration: none;
+  color: #2a2a2a;
+  font-weight: 600;
+  font-size: .88rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color .22s;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--rojo);
+  border-radius: 2px;
+  transition: width .3s cubic-bezier(.4,0,.2,1);
+}
+
+nav a:hover { color: var(--rojo); }
+nav a:hover::after { width: 100%; }
+
+.telefono {
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: .04em;
+  color: var(--blanco);
+  background: var(--rojo);
+  padding: 9px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 18px rgba(214,40,40,.30);
+  transition: background .22s, transform .22s, box-shadow .22s;
+}
+.telefono:hover {
+  background: var(--rojo-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(214,40,40,.38);
+}
+
+.banner{
+
+position:relative;
+
+height:600px;
+
+overflow:hidden;
+
+display:flex;
+justify-content:center;
+align-items:flex-end;
+}
+
+
+
+.iconos-menu{
+
+display:flex;
+
+justify-content:center;
+
+gap:120px;
+
+padding:90px 0;
+}
+
+.icono{
+
+text-decoration:none;
+color:black;
+}
+
+
+
+.contenedor-imagen{
+
+    position:relative;
+
+    width:300px;
+    height:300px;
+
+    transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change: transform;
+
+
+}
+
+.contenedor-imagen img{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+object-fit:contain;
+
+transition:.4s;
+}
+
+
+.hover  { opacity: 0; transform: scale(.85) rotate(-6deg); }
+.normal { opacity: 1; transform: scale(1)   rotate(0deg); }
+
+.icono:hover .normal { opacity: 0; transform: scale(1.12) rotate(4deg); }
+.icono:hover .hover  { opacity: 1; transform: scale(1.05)    rotate(0deg); }
+
+.icono:hover .contenedor-imagen {
+  transform: scale(1.1) translateY(-12px);
+  box-shadow: var(--sh-xl);
+}
+
+.icono p {
+  font-family: 'Bebas Neue', sans-serif;
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: .18em;
+  margin-top: 26px;
+  color: var(--negro);
+  transition: color .25s, letter-spacing .35s var(--ease-out);
+}
+.icono:hover p {
+  color: var(--rojo);
+  letter-spacing: .26em;
+}
+
+
+.ingredientes{
+
+position:relative;
+
+height:800px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+}
+
+.ingredientes-fondo{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+}
+
+.ingredientes-imagen{
+
+position:absolute;
+
+width:100%;
+height: 750px;
+
+animation:flotar 3s infinite ease-in-out;
+}
+
+
+
+.quienes{
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+padding:100px 50px;
+}
+
+.imagen img{
+
+width:320px;
+
+animation:flotar 3s infinite ease-in-out;
+}
+
+.texto{
+
+max-width:600px;
+}
+
+.texto h2{
+
+font-size:3rem;
+
+margin-bottom:20px;
+
+color:#d62828;
+}
+
+.texto p{
+
+line-height:1.8;
+}
+
+.ofertas{
+
+padding:80px 0;
+
+display:flex;
+justify-content:center;
+}
+
+.slider{
+
+width:1200px;
+
+height:500px;
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:35px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.slide{
+
+position:absolute;
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+opacity:0;
+
+transition:1s;
+}
+
+.slide.activo{
+
+opacity:1;
+}
+
+footer {
+  background: var(--azul-pie);
+  color: var(--blanco);
+  padding: 64px 80px 40px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 48px;
+}
+
+/* columna izquierda: marca */
+.footer-marca {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-logo {
+   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 2.8rem;
+  letter-spacing: .14em;
+  color: var(--blanco);
+  line-height: 1;
+}
+
+.footer-slogan {
+  font-size: .82rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,.55);
+  letter-spacing: .04em;
+  line-height: 1.6;
+  max-width: 220px;
+}
+
+.footer-redes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.70);
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background .22s, color .22s, transform .22s var(--ease-out);
+}
+.footer-redes a:hover {
+  background: var(--rojo);
+  color: var(--blanco);
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* columna central: contacto */
+.footer-contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-top: 6px;
+}
+
+.footer-contacto-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: .22em;
+  color: rgba(255,255,255,.40);
+  margin-bottom: 4px;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .88rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.82);
+  transition: color .22s, transform .22s var(--ease-out);
+  cursor: default;
+}
+.footer-item:hover {
+  color: var(--blanco);
+  transform: translateY(-2px);
+}
+
+.footer-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.09);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* columna derecha: horario / extra */
+.footer-extra {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.footer-extra-titulo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: .22em;
+  color: rgba(255,255,255,.40);
+  margin-bottom: 4px;
+}
+
+.footer-horario-item {
+  font-size: .85rem;
+  color: rgba(255,255,255,.70);
+  text-align: right;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.footer-horario-item strong {
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+}
+
+/* línea inferior del footer */
+.footer-bottom {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: .75rem;
+  color: rgba(255,255,255,.30);
+  letter-spacing: .04em;
+}
+
+.footer-badge {
+  font-size: .72rem;
+  color: rgba(255,255,255,.25);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+
+
+.cuadro-imagen{
+
+    width:420px;
+    height:300px;
+
+    margin:50px auto;
+
+
+    overflow:hidden;
+}
+
+.cuadro-imagen img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
